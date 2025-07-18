@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <script>
+        let humanScore = 0;   // Initialising human and computer scores
+        let computerScore = 0; 
+        let humanChoice;      // Declared a variable for human choice
+        
+        function getHumanChoice(){   // Function for getting human choice
+            humanChoice = prompt("Welcome to Rock, Paper and Scissor. Choose your option:");
+            return humanChoice;
+        }
+
+        let computerChoice;    // Variable for computer choice
+
+        function getComputerChoice(){   // Function for generating computer choice using random function
+            let a = Math.random() * 100 ;
+            console.log(Math.floor(a));
+            if(a >= 0 && a <= 33){
+                computerChoice = "Rock";
+            }
+            else if(a > 33 && a <= 66){
+                computerChoice = "Paper";
+            }
+            else{
+                computerChoice = "Scissor";
+            }
+            return computerChoice;
+        }
+        function playGame(){  // Main function for running the game
+            
+            function playRound(humanChoice,computerChoice){   // Function for testing out conditions and printing who won to the console
+                if(humanChoice.toLowerCase() === computerChoice.toLowerCase()){  // Made the choices comparable using the lowercase function
+                    console.log(`Computer chose: ${computerChoice}`);
+                    console.log(`You chose: ${humanChoice}`);
+                    console.log("Woops!! It's a tie.");
+                }
+                else if(humanChoice.toLowerCase() === "rock" && computerChoice.toLowerCase() === "paper"){
+                    console.log("Computer chose: Paper");
+                    console.log("You chose: Rock");
+                    console.log("You lose! Paper beats Rock");
+                    computerScore++;
+                }
+                else if(humanChoice.toLowerCase() === "rock" && computerChoice.toLowerCase() === "scissor"){
+                    console.log("Computer chose: Scissor");
+                    console.log("You chose: Rock");
+                    console.log("You won! Rock beats Scissor");
+                    humanScore++;
+                }
+                else if(humanChoice.toLowerCase() === "paper" && computerChoice.toLowerCase() === "rock"){
+                    console.log("Computer chose: Rock");
+                    console.log("You chose: Paper");
+                    console.log("You won! Paper beats Rock");
+                    humanScore++;
+                }
+                else if(humanChoice.toLowerCase() === "paper" && computerChoice.toLowerCase() === "scissor"){
+                    console.log("Computer chose: Scissor");
+                    console.log("You chose: Paper");
+                    console.log("You lose! Scissor beats Paper");
+                    computerScore++;
+                }   
+                else if(humanChoice.toLowerCase() === "scissor" && computerChoice.toLowerCase() === "rock"){
+                    console.log("Computer chose: Rock");
+                    console.log("You chose: Scissor");
+                    console.log("You lose! Rock beats Scissor");
+                    computerScore++;
+                }
+                else if(humanChoice.toLowerCase() === "scissor" && computerChoice.toLowerCase() === "paper"){
+                    console.log("Computer chose: Paper");
+                    console.log("You chose: Scissor");
+                    console.log("You won! Scissor beats Paper");
+                    humanScore++;
+                }
+            }
+            const humanSelection = getHumanChoice();         // These two variables are responsible for calling the functions for gettting 
+            const computerSelection = getComputerChoice();   // human and computer choices and catching the values for the same.
+            playRound(humanSelection,computerSelection);     // Passed further in the function to initiate the function
+        }
+        for(let i = 1; i < 6; i++){     // Loop used for calling the playGame function 5 times and also printing the scores of both
+            console.log(`Round ${i}`);  // players at the end of the each round
+            playGame();
+            console.log(`After Round ${i}, scores are:`);
+            console.log(`You : ${humanScore}`);
+            console.log(`Computer : ${computerScore}`);
+        }
+        
+        if(humanScore > computerScore){   // At last display the message who won after 5 rounds
+            console.log("Congrats! You Won.");
+        }
+        else if(humanScore < computerScore){
+            console.log("You Lost.");
+        }
+        else{
+            console.log("Scores Level! It's a draw.");
+        }
+    </script>
+</body>
+</html>
